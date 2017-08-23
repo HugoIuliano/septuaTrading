@@ -1,0 +1,3 @@
+# Module septuatrading
+# RPC service class, partial path of RPC policy file
+septua.trading.client.GreetingService, E3C3A009B0A972CB6FAC0E98F7AD67B1.gwt.rpc
