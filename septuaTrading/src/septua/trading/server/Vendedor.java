@@ -9,18 +9,18 @@ import javax.persistence.Id;
 public class Vendedor {
 	
 	@Id
-	private Integer id;
+	private String id;
 	private String appToken;
 	private String accessToken;
 	private String nome;
 	private String descricao;
 	private String cpf;
 	private String cep;
-	private String endereco;
-	public Integer getId() {
+	private Endereco endereco;
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getAppToken() {
@@ -59,24 +59,12 @@ public class Vendedor {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public String getEndereco() {
-		return endereco;
+	public Endereco getEndereco() {
+		return this.endereco; // nao retorna no get
 	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setEndereco(String descricao, String latitude, String longitude) {
+		this.endereco = new Endereco(descricao, latitude, longitude);
 	}
-	public String getEndereco_lat() {
-		return endereco_lat;
-	}
-	public void setEndereco_lat(String endereco_lat) {
-		this.endereco_lat = endereco_lat;
-	}
-	public String getEndereco_long() {
-		return endereco_long;
-	}
-	public void setEndereco_long(String endereco_long) {
-		this.endereco_long = endereco_long;
-	}
-	private String endereco_lat;
-	private String endereco_long;
+
 }
+
