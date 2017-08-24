@@ -1,0 +1,5 @@
+package septua.trading.server;
+
+public class Vendedor {
+
+}
