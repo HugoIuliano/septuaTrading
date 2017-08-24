@@ -4,7 +4,7 @@
     angular.module('SeptuaTradingApp')
         .factory('Vendedor', ['$http', '$mdDialog', '$mdMedia', function($http, $mdDialog, $mdMedia) {
 
-            const url = 'http://127.0.0.1:8888/_ah/api/vendedorendpoint/v1/vendedor';
+            const url = '/_ah/api/vendedorendpoint/v1/vendedor';
 
             function Vendedor(nome, documento, endereco, latitude, longitude) {
                 return {

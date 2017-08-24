@@ -4,7 +4,7 @@
     angular.module('SeptuaTradingApp')
         .factory('Entrega', ['$http', function($http) {
 
-            const url = 'http://127.0.0.1:8888/_ah/api/entregaendpoint/v1/entrega';
+            const url = '/_ah/api/entregaendpoint/v1/entrega';
 
             function Entrega(vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino) {
                 return {
