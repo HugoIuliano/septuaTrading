@@ -1,0 +1,204 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://septua-tranding.appspot.com/_ah/api",
+  "name" : "vendedorendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://septua-tranding.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "septua.com",
+  "ownerName" : "septua.com",
+  "packagePath" : "api.server",
+  "methods" : {
+    "vendedorendpoint.listVendedor" : {
+      "path" : "vendedor",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.VendedorEndpoint.listVendedor",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vendedorendpoint.getVendedor" : {
+      "path" : "vendedor/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.VendedorEndpoint.getVendedor",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vendedorendpoint.insertVendedor" : {
+      "path" : "vendedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.VendedorEndpoint.insertVendedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vendedorendpoint.updateVendedor" : {
+      "path" : "vendedor",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.VendedorEndpoint.updateVendedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vendedorendpoint.removeVendedor" : {
+      "path" : "vendedor/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.VendedorEndpoint.removeVendedor",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_Vendedor" : {
+        "id" : "CollectionResponse_Vendedor",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Vendedor"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Vendedor" : {
+        "id" : "Vendedor",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "documento" : {
+            "type" : "string"
+          },
+          "endereco" : {
+            "type" : "string"
+          },
+          "lat" : {
+            "type" : "string"
+          },
+          "lng" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.septua.api.server.VendedorEndpoint.listVendedor" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Vendedor"
+        }
+      },
+      "com.septua.api.server.VendedorEndpoint.getVendedor" : {
+        "response" : {
+          "$ref" : "Vendedor"
+        }
+      },
+      "com.septua.api.server.VendedorEndpoint.insertVendedor" : {
+        "request" : {
+          "$ref" : "Vendedor"
+        },
+        "response" : {
+          "$ref" : "Vendedor"
+        }
+      },
+      "com.septua.api.server.VendedorEndpoint.updateVendedor" : {
+        "request" : {
+          "$ref" : "Vendedor"
+        },
+        "response" : {
+          "$ref" : "Vendedor"
+        }
+      },
+      "com.septua.api.server.VendedorEndpoint.removeVendedor" : {
+      }
+    }
+  }
+}

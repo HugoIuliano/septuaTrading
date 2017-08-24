@@ -21,7 +21,7 @@
     <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
     <init-param>
       <param-name>services</param-name>
-      <param-value>septua.trading.server.VendedorEndpoint</param-value>
+      <param-value/>
     </init-param>
   </servlet>
 

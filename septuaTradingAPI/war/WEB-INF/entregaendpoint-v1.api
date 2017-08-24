@@ -1,0 +1,222 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://septua-tranding.appspot.com/_ah/api",
+  "name" : "entregaendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://septua-tranding.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "septua.com",
+  "ownerName" : "septua.com",
+  "packagePath" : "api.server",
+  "methods" : {
+    "entregaendpoint.listEntrega" : {
+      "path" : "entrega",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregaEndpoint.listEntrega",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregaendpoint.getEntrega" : {
+      "path" : "entrega/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregaEndpoint.getEntrega",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregaendpoint.insertEntrega" : {
+      "path" : "entrega",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregaEndpoint.insertEntrega",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregaendpoint.updateEntrega" : {
+      "path" : "entrega",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregaEndpoint.updateEntrega",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregaendpoint.removeEntrega" : {
+      "path" : "entrega/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregaEndpoint.removeEntrega",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_Entrega" : {
+        "id" : "CollectionResponse_Entrega",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Entrega"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Entrega" : {
+        "id" : "Entrega",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "vendedorId" : {
+            "type" : "string"
+          },
+          "vendedorNome" : {
+            "type" : "string"
+          },
+          "recebedorNome" : {
+            "type" : "string"
+          },
+          "recebedorDocumento" : {
+            "type" : "string"
+          },
+          "produto" : {
+            "type" : "string"
+          },
+          "distancia" : {
+            "type" : "string"
+          },
+          "tempo" : {
+            "type" : "string"
+          },
+          "preco" : {
+            "type" : "string"
+          },
+          "endereco" : {
+            "type" : "string"
+          },
+          "lat" : {
+            "type" : "string"
+          },
+          "lng" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.septua.api.server.EntregaEndpoint.listEntrega" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Entrega"
+        }
+      },
+      "com.septua.api.server.EntregaEndpoint.getEntrega" : {
+        "response" : {
+          "$ref" : "Entrega"
+        }
+      },
+      "com.septua.api.server.EntregaEndpoint.insertEntrega" : {
+        "request" : {
+          "$ref" : "Entrega"
+        },
+        "response" : {
+          "$ref" : "Entrega"
+        }
+      },
+      "com.septua.api.server.EntregaEndpoint.updateEntrega" : {
+        "request" : {
+          "$ref" : "Entrega"
+        },
+        "response" : {
+          "$ref" : "Entrega"
+        }
+      },
+      "com.septua.api.server.EntregaEndpoint.removeEntrega" : {
+      }
+    }
+  }
+}

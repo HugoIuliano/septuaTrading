@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="SeptuaTradingApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Septua Trading</title>
+
+        <link href="./css/css.css" rel="stylesheet">
+        <!-- Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Angular Material style sheet -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    </head>
+    <body>
+        <div ng-controller="IndexController as index" layout="column" ng-cloak>
+
+            <md-fab-speed-dial md-open="lastMile.screen.isOpen" ng-click="lastMile.screen.isOpen = !lastMile.screen.isOpen" md-direction="up" class="md-fab md-scale md-fab-bottom-right">
+                <md-fab-trigger>
+                    <md-button aria-label="Adicionar Entidades" class="md-fab">
+                        <md-icon>add</md-icon>
+                    </md-button>
+                </md-fab-trigger>
+
+                <md-fab-actions>
+                    <md-button aria-label="Last mile" class="md-fab md-mini md-primary" ng-click="index.addVendedor($event)">
+                        <md-icon>store</md-icon>
+                        <md-tooltip md-direction="left">Vendedor</md-tooltip>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
+
+
+            <md-toolbar md-scroll-shrink ng-if="true">
+                <div class="md-toolbar-tools">
+                    <h3>
+                        <span>{{ index.screen.title }}</span>
+                    </h3>
+                </div>
+            </md-toolbar>
+
+            <div id="map"></div>
+
+            <div class="float-address">
+
+                <!-- <div layout-margin>
+                    <md-autocomplete md-no-cache="index.screen.autocomplete.noCache"
+                                     md-selected-item="index.originAddress"
+                                     md-search-text="index.originSearchText"
+                                     md-selected-item-change="index.originSelected(item)"
+                                     md-items="item in index.searchAddress(index.originSearchText)"
+                                     md-item-text="item.formatted_address"
+                                     md-min-length="5"
+                                     placeholder="Origem">
+                         <md-item-template>
+                             <span md-highlight-text="index.originSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
+                         </md-item-template>
+                         <md-not-found>
+                             No address matching "{{ index.originSearchText }}" were found.
+                         </md-not-found>
+                     </md-autocomplete>
+                </div> -->
+
+                 <div layout-margin>
+                     <md-autocomplete md-no-cache="index.screen.autocomplete.noCache"
+                                      md-selected-item="index.endAddress"
+                                      md-search-text="index.endSearchText"
+                                      md-selected-item-change="index.endSelected(item)"
+                                      md-items="item in index.searchAddress(index.endSearchText)"
+                                      md-item-text="item.formatted_address"
+                                      md-min-length="5"
+                                      placeholder="Destino">
+                          <md-item-template>
+                              <span md-highlight-text="index.endSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
+                          </md-item-template>
+                          <md-not-found>
+                              No address matching "{{ index.endSearchText }}" were found.
+                          </md-not-found>
+                      </md-autocomplete>
+                 </div>
+
+                 <div layout-padding>
+                     <md-card layout-padding>
+                         <div>
+                             <md-input-container md-no-float class="md-block">
+                                 <md-icon>card_giftcard</md-icon>
+                                 <input ng-model="index.produto" type="text" placeholder="Produto">
+                             </md-input-container>
+                         </div>
+                         <div layout="row" flex="100">
+                             <md-input-container md-no-float class="md-block">
+                                 <md-icon>attach_money</md-icon>
+                                 <input ng-model="index.preco" type="number" placeholder="Preço">
+                             </md-input-container>
+                         </div>
+                         <div layout="row" flex="100">
+                             <md-input-container md-no-float class="md-block">
+                                 <md-icon>person</md-icon>
+                                 <input ng-model="index.nome" type="text" placeholder="Nome">
+                             </md-input-container>
+
+                             <md-input-container md-no-float class="md-block">
+                                 <input ng-model="index.documento" type="text" placeholder="Número documento">
+                             </md-input-container>
+                         </div>
+                         <div layout="row" layout-align="end center">
+                             <md-button class="md-secundary">cancelar</md-button>
+                             <md-button class="md-raised md-primary" ng-click="index.salvarEntrega()">salvar</md-button>
+                         </div>
+                     </md-card>
+                 </div>
+
+            </div>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYuEz4jGQLqNpI4n8Zt62P3qV2egjdrJU&libraries=places"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <!-- Angular Material Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+        <script type="text/javascript">
+            angular.module('SeptuaTradingApp', ['ngMaterial']);
+        </script>
+
+        <script src="./indexController.js" type="text/javascript"></script>
+        <script src="./entrega.js" type="text/javascript"></script>
+        <script src="./vendedor.js" type="text/javascript"></script>
+
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDAcH6-flBeXKZrihwkzA7Vee30fX6UX8&callback=initMap" async defer></script> -->
+    </body>
+</html>

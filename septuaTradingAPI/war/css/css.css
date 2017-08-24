@@ -1,0 +1,24 @@
+body {
+    overflow: hidden;
+}
+
+#map {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+@media only screen and (max-width: 959px) {
+    #map {
+        top: 48px;
+    }
+}
+
+.float-address {
+    position: absolute;
+    top: 65px;
+    width: 450px;
+    z-index: 1;
+}

@@ -1,0 +1,204 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://septua-tranding.appspot.com/_ah/api",
+  "name" : "rastreadorendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://septua-tranding.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "septua.com",
+  "ownerName" : "septua.com",
+  "packagePath" : "api.server",
+  "methods" : {
+    "rastreadorendpoint.removeRastreador" : {
+      "path" : "rastreador/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.removeRastreador",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "rastreadorendpoint.getRastreador" : {
+      "path" : "rastreador/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.getRastreador",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "rastreadorendpoint.insertRastreador" : {
+      "path" : "rastreador",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.insertRastreador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "rastreadorendpoint.listRastreador" : {
+      "path" : "rastreador",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.listRastreador",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "rastreadorendpoint.updateRastreador" : {
+      "path" : "rastreador",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.updateRastreador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Rastreador" : {
+        "id" : "Rastreador",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "entregaId" : {
+            "type" : "string"
+          },
+          "vendedorId" : {
+            "type" : "string"
+          },
+          "entregadorId" : {
+            "type" : "string"
+          },
+          "lat" : {
+            "type" : "string"
+          },
+          "lng" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Rastreador" : {
+        "id" : "CollectionResponse_Rastreador",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Rastreador"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.septua.api.server.RastreadorEndpoint.removeRastreador" : {
+      },
+      "com.septua.api.server.RastreadorEndpoint.getRastreador" : {
+        "response" : {
+          "$ref" : "Rastreador"
+        }
+      },
+      "com.septua.api.server.RastreadorEndpoint.insertRastreador" : {
+        "request" : {
+          "$ref" : "Rastreador"
+        },
+        "response" : {
+          "$ref" : "Rastreador"
+        }
+      },
+      "com.septua.api.server.RastreadorEndpoint.listRastreador" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Rastreador"
+        }
+      },
+      "com.septua.api.server.RastreadorEndpoint.updateRastreador" : {
+        "request" : {
+          "$ref" : "Rastreador"
+        },
+        "response" : {
+          "$ref" : "Rastreador"
+        }
+      }
+    }
+  }
+}
