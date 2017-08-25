@@ -6,7 +6,7 @@
 
             var self = this;
 
-            $rootScope.screen.title = "Septua Trading - Embarcador";
+            $rootScope.screen.title = "Vendedor";
 
             self.screen = {
                 dataCard: false
@@ -23,9 +23,14 @@
             self.hideEntrega = hideEntrega;
             self.addEntrega = addEntrega;
 
-            Map.init();
+            self.map = Map.init(document.getElementById('mapVendedor'));
 
             Vendedor.get().then(function(response) {
+
+                if (response.data.items == null) {
+                    return;
+                }
+
                 self.vendedor = response.data.items[0];
                 self.vendedor.geometry = {
                     location: {
@@ -33,7 +38,7 @@
                         , lng: Number(self.vendedor.lng)
                     }
                 }
-                Map.addBuildingMarker(self.vendedor, true);
+                Map.addBuildingMarker(self.map, self.vendedor, true);
 
                 getEntregas();
             });
@@ -41,6 +46,10 @@
             function getEntregas() {
 
                 Entrega.get().then(function(response) {
+
+                    if (response.data.items == null) {
+                        return;
+                    }
 
                     for (var i = 0; i < response.data.items.length; i++) {
                         var record = response.data.items[i];
@@ -58,7 +67,7 @@
 
                         var object = { geometry: { location: { lat: Number(record.lat), lng: Number(record.lng) }}};
 
-                        Map.addMarker(object, contentString, record, function(marker) {
+                        Map.addMarker(self.map, object, contentString, record, function(marker) {
                             fullEntrega(marker.entrega.id);
                         });
                     }

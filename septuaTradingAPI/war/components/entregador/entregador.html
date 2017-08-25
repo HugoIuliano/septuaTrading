@@ -1,10 +1,10 @@
 <div ng-controller="EntregadorController as entregador">
 
-    <md-button class="md-fab md-fab-bottom-right" aria-label="Entrega" ng-click="entregador.getPosition()" show-xs hide-gt-xs>
+    <!-- <md-button class="md-fab md-fab-bottom-right" aria-label="Entrega" ng-click="entregador.getPosition()" show-xs hide-gt-xs>
         <md-icon>directions</md-icon>
-    </md-button>
+    </md-button> -->
 
-    <div id="map"></div>
+    <div id="mapEntregador"></div>
 
     <div class="float-address">
 
@@ -79,7 +79,7 @@
                 </div>
                 <div layout="row" layout-align="end center" ng-show="entregador.entrega.id != null">
                     <md-button class="md-secundary" ng-click="entregador.hideDelivery()">cancelar</md-button>
-                    <md-button class="md-raised md-primary" ng-click="entregador.addDelivery()">entregar</md-button>
+                    <md-button class="md-raised md-accent" ng-click="entregador.addDelivery()">entregar</md-button>
                 </div>
                 <!-- <div layout="row" layout-align="end center" ng-show="entregador.entrega.id != null">
                     <md-button class="md-secundary" ng-click="entregador.hideEntrega()">fechar</md-button>

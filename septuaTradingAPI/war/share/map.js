@@ -19,13 +19,14 @@
                 return icon;
             }
 
-            this.init = function() {
+            this.init = function(element) {
                 var options = {
                     center: new google.maps.LatLng(-23.5947479, -46.686047599999995),
                     zoom: 10,
                     disableDefaultUI: true
                 }
-                this.map = new google.maps.Map(document.getElementById("map"), options);
+                return new google.maps.Map(element, options);
+                // this.map = new google.maps.Map(document.getElementById("map"), options);
                 // this.places = new google.maps.places.PlacesService(this.map);
             }
 
@@ -41,18 +42,18 @@
             }
 
             this.addressSearch = function(str) {
-                var address = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + str + '&key=AIzaSyDYuEz4jGQLqNpI4n8Zt62P3qV2egjdrJU';
+                var address = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + str + '&key=AIzaSyBtdPUbhKXuMgFJ2MP5ZTTdQZKmVmIOWGM';
                 return $http.get(address);
             }
 
-            this.addMarker = function(res, contentString, entrega, callback) {
+            this.addMarker = function(map, res, contentString, entrega, callback) {
 
                 // var infowindow = new google.maps.InfoWindow({
                 //     content: contentString
                 // });
 
                 var marker = new google.maps.Marker({
-                    map: this.map,
+                    map: map,
                     position: res.geometry.location,
                     animation: google.maps.Animation.DROP,
                     icon: getIcon(entrega.situacao),
@@ -75,7 +76,7 @@
                 }
             }
 
-            this.addBuildingMarker = function(res, closeOthers, contentString, empresa, callback) {
+            this.addBuildingMarker = function(map, res, closeOthers, contentString, empresa, callback) {
 
                 if (closeOthers && this.buildingMarker) {
                     this.buildingMarker.setMap(null);
@@ -86,14 +87,14 @@
                 });
 
                 var markerBuilding = new google.maps.Marker({
-                    map: this.map,
+                    map: map,
                     position: res.geometry.location,
                     animation: google.maps.Animation.DROP,
                     icon: 'https://maps.google.com/mapfiles/kml/shapes/buildings.png',
                     empresa: empresa
                 });
 
-                if (!closeOthers) {
+                if (!closeOthers && contentString != null) {
                     markerBuilding.addListener('click', function() {
                         infowindow.open(map, markerBuilding);
                         callback(markerBuilding);
@@ -101,10 +102,10 @@
                     return;
                 }
 
-                this.map.setCenter(res.geometry.location);
+                map.setCenter(res.geometry.location);
             }
 
-            this.addDeliveryMarker = function(res, closeOthers) {
+            this.addDeliveryMarker = function(map, res, closeOthers) {
                 if (closeOthers && this.deliveryMarker) {
                     this.deliveryMarker.setMap(null);
                 }
@@ -115,12 +116,12 @@
                     anchor: new google.maps.Point(0, 32)
                 };
                 this.deliveryMarker = new google.maps.Marker({
-                    map: this.map,
+                    map: map,
                     position: res.geometry.location,
                     animation: google.maps.Animation.DROP,
                     icon: image
                 });
-                this.map.setCenter(res.geometry.location);
+                map.setCenter(res.geometry.location);
             }
 
             this.calcDistance = function(origin, destination, viewCallback) {
@@ -149,7 +150,7 @@
             // this.traceRoute = function(origin, destination) {
             //     // var paramOrigin = origin.geometry.location.lat + ',' + origin.geometry.location.lng
             //     // var paramDestination = destination.geometry.location.lat + ',' + destination.geometry.location.lng
-            //     // var address = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + paramOrigin +'&destination=' + paramDestination + '&key=AIzaSyDYuEz4jGQLqNpI4n8Zt62P3qV2egjdrJU';
+            //     // var address = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + paramOrigin +'&destination=' + paramDestination + '&key=AIzaSyBtdPUbhKXuMgFJ2MP5ZTTdQZKmVmIOWGM';
             //     // return $http.get(address);
             //
             //     if (origin == null || destination == null) {

@@ -2,22 +2,21 @@ body {
     overflow: hidden;
 }
 
-#map {
+.domain-icon {
+   background-image: url("/../app_icon.png");
+   background-size: contain;
+   background-position: 0 center;
+   background-repeat: no-repeat;
+   height: 90%;
+   width: 50px;
+}
+
+#map, #mapVendedor, #mapEntregador {
     position: absolute;
     top: 65px;
     right: 0;
     bottom: 0;
     left: 0;
-}
-
-@media only screen and (max-width: 959px) {
-    #map {
-        top: 48px;
-    }
-
-    .float-address {
-        width: 100%;
-    }
 }
 
 .float-address {
@@ -26,3 +25,38 @@ body {
     width: 450px;
     z-index: 1;
 }
+
+    /* Medium */
+
+    @media only screen and (min-width:961px) and (max-width: 1280px) {
+        #map, #mapVendedor, #mapEntregador {
+            top: 58px;
+        }
+
+        .float-address {
+            /*width: 330px;*/
+        }
+    }
+
+    /* small */
+
+    @media only screen and (min-width:601px) and (max-width: 960px) {
+        #map, #mapVendedor, #mapEntregador {
+            top: 48px;
+        }
+
+        .float-address {
+            /*width: 440px;*/
+        }
+    }
+
+    /*  x small */
+    @media only screen and (max-width: 600px) {
+        #map, #mapVendedor, #mapEntregador {
+            top: 48px;
+        }
+
+        .float-address {
+            width: 360px;
+        }
+    }

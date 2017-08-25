@@ -6,7 +6,7 @@
 
             var self = this;
 
-            $rootScope.screen.title = "Septua Trading - Entregador";
+            $rootScope.screen.title = "Entregador"; // "Septua Trading - Entregador";
 
             self.screen = {
                 dataCard: false
@@ -23,7 +23,7 @@
             self.addDelivery = addDelivery;
             self.getPosition = getPosition;
 
-            Map.init();
+            self.map = Map.init(document.getElementById('mapEntregador'));
             getPosition();
             getVendedores();
 
@@ -45,11 +45,15 @@
                     }
                 };
 
-                Map.addDeliveryMarker(self.myPosition, true);
+                Map.addDeliveryMarker(self.map, self.myPosition, true);
             }
 
             function getVendedores() {
                 Vendedor.get().then(function(response) {
+
+                    if (response.data.items == null) {
+                        return;
+                    }
 
                     for (var i = 0; i < response.data.items.length; i++) {
                         var record = response.data.items[i];
@@ -62,7 +66,7 @@
 
                         var object = { geometry: { location: { lat: Number(record.lat), lng: Number(record.lng) }}};
 
-                        Map.addBuildingMarker(object, false, contentString, record, function(marker) {
+                        Map.addBuildingMarker(self.map, object, false, contentString, record, function(marker) {
                             getEntregas(marker.empresa.id);
                             self.vendedor = marker.empresa;
                         });
@@ -73,6 +77,10 @@
             function getEntregas(vendedorId) {
 
                 Entrega.get().then(function(response) {
+
+                    if (response.data.items == null) {
+                        return;
+                    }
 
                     for (var i = 0; i < response.data.items.length; i++) {
                         var record = response.data.items[i];
@@ -93,7 +101,7 @@
                         '</div>';
 
                         var object = { geometry: { location: { lat: Number(record.lat), lng: Number(record.lng) }}};
-                        Map.addMarker(object, contentString, record, function(marker) {
+                        Map.addMarker(self.map, object, contentString, record, function(marker) {
                             fullEntrega(marker.entrega.id);
                         });
                     }

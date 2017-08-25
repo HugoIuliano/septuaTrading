@@ -5,7 +5,7 @@
         <md-tooltip md-direction="left">Entrega</md-tooltip>
     </md-button>
 
-    <div id="map"></div>
+    <div id="mapVendedor"></div>
 
     <div class="float-address">
 
@@ -80,7 +80,7 @@
                 </div>
                 <div layout="row" layout-align="end center" ng-show="vendedor.entrega.id == null">
                     <md-button class="md-secundary" ng-click="vendedor.hideEntrega()">cancelar</md-button>
-                    <md-button class="md-raised md-primary" ng-click="vendedor.addEntrega()">salvar</md-button>
+                    <md-button class="md-raised md-accent" ng-click="vendedor.addEntrega()">salvar</md-button>
                 </div>
                 <div layout="row" layout-align="end center" ng-show="vendedor.entrega.id != null">
                     <md-button class="md-secundary" ng-click="vendedor.hideEntrega()">fechar</md-button>

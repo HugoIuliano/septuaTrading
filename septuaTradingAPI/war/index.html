@@ -13,9 +13,10 @@
     <body>
         <div ng-controller="IndexController as index" layout="column" ng-cloak>
 
-            <md-toolbar md-scroll-shrink ng-if="true">
+            <md-toolbar md-scroll-shrink ng-if="true" class="md-whiteframe-z2">
                 <div class="md-toolbar-tools">
-                    <h3>
+                    <div class="domain-icon"></div>
+                    <h3 style="margin-left: 18px;" flex>
                         <span>{{ screen.title }}</span>
                     </h3>
                 </div>
@@ -24,7 +25,7 @@
             <ng-view></ng-view>
         </div>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYuEz4jGQLqNpI4n8Zt62P3qV2egjdrJU&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtdPUbhKXuMgFJ2MP5ZTTdQZKmVmIOWGM&libraries=places"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>

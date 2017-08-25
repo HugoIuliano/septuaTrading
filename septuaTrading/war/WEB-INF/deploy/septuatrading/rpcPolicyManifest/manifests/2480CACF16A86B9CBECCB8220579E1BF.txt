@@ -1,2 +1,0 @@
-serviceClass: septua.trading.client.GreetingService
-path: E3C3A009B0A972CB6FAC0E98F7AD67B1.gwt.rpc

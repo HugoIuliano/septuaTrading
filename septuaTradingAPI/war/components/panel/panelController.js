@@ -5,7 +5,7 @@
         .controller('PanelController', ['$rootScope', '$scope', '$mdToast', 'Map', 'Entrega', 'Vendedor', 'Entregador', 'notification', function($rootScope, $scope, $mdToast, Map, Entrega, Vendedor, Entregador, notification) {
             var self = this;
 
-            $rootScope.screen.title = "Septua Trading - Painel";
+            $rootScope.screen.title = "Septua Trading";
 
             self.screen = {
                 dataCard: false
@@ -26,9 +26,14 @@
             self.addEntregador = addEntregador;
             // self.addDelivery = addDelivery;
 
-            Map.init();
+            self.map = Map.init(document.getElementById("map"));
 
             Vendedor.get().then(function(response) {
+
+                if (response.data.items == null) {
+                    return;
+                }
+
                 self.vendedor = response.data.items[0];
                 self.vendedor.geometry = {
                     location: {
@@ -36,13 +41,17 @@
                         , lng: Number(self.vendedor.lng)
                     }
                 }
-                Map.addBuildingMarker(self.vendedor);
+                Map.addBuildingMarker(self.map, self.vendedor);
                 getEntregas();
             });
 
             function getEntregas() {
 
                 Entrega.get().then(function(response) {
+
+                    if (response.data.items == null) {
+                        return;
+                    }
 
                     for (var i = 0; i < response.data.items.length; i++) {
                         var record = response.data.items[i];
@@ -56,7 +65,7 @@
 
                         var object = { geometry: { location: { lat: Number(record.lat), lng: Number(record.lng) }}};
 
-                        Map.addMarker(object, contentString, record, function(marker) {
+                        Map.addMarker(self.map, object, contentString, record, function(marker) {
                             fullEntrega(marker.entrega.id);
                         });
                     }
@@ -88,11 +97,11 @@
             }
 
             function originSelected() {
-                Map.addMarker(self.originAddress);
+                Map.addMarker(self.map, self.originAddress);
             }
 
             function destinationSelected() {
-                // Map.addMarker(self.entrega.endAddress);
+                // Map.addMarker(self.map, self.entrega.endAddress);
                 Map.calcDistance(self.vendedor, self.entrega.endAddress, function(response, status) {
                     if (status == 'OK') {
                         var origins = response.originAddresses;
@@ -152,7 +161,7 @@
             //         }
             //     };
             //
-            //     Map.addMarker(browserLocation);
+            //     Map.addMarker(self.map, browserLocation);
             // }
         }]);
 })();
