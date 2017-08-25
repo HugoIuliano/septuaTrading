@@ -1,0 +1,126 @@
+<div ng-controller="PanelController as panel">
+
+    <md-fab-speed-dial md-open="panel.screen.isOpen" ng-click="panel.screen.isOpen = !panel.screen.isOpen" md-direction="up" class="md-fab md-scale md-fab-bottom-right">
+        <md-fab-trigger>
+            <md-button aria-label="Adicionar Entidades" class="md-fab">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+            <md-button aria-label="Vendedor" class="md-fab md-mini md-primary" ng-click="panel.addEntregador($event)">
+                <md-icon>person</md-icon>
+                <md-tooltip md-direction="left">Entregador</md-tooltip>
+            </md-button>
+        </md-fab-actions>
+
+        <md-fab-actions>
+            <md-button aria-label="Vendedor" class="md-fab md-mini md-primary" ng-click="panel.addVendedor($event)">
+                <md-icon>store</md-icon>
+                <md-tooltip md-direction="left">Vendedor</md-tooltip>
+            </md-button>
+        </md-fab-actions>
+
+        <!-- <md-fab-actions>
+            <md-button aria-label="Entrega" class="md-fab md-mini md-primary" ng-click="panel.viewEntrega($event)">
+                <md-icon>mail</md-icon>
+                <md-tooltip md-direction="left">Entrega</md-tooltip>
+            </md-button>
+        </md-fab-actions> -->
+    </md-fab-speed-dial>
+
+    <div id="map"></div>
+
+    <div class="float-address">
+
+        <!-- <div layout-margin>
+            <md-autocomplete md-no-cache="panel.screen.autocomplete.noCache"
+                             md-selected-item="panel.originAddress"
+                             md-search-text="panel.originSearchText"
+                             md-selected-item-change="panel.originSelected(item)"
+                             md-items="item in panel.searchAddress(panel.originSearchText)"
+                             md-item-text="item.formatted_address"
+                             md-min-length="5"
+                             placeholder="Origem">
+                 <md-item-template>
+                     <span md-highlight-text="panel.originSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
+                 </md-item-template>
+                 <md-not-found>
+                     No address matching "{{ panel.originSearchText }}" were found.
+                 </md-not-found>
+             </md-autocomplete>
+        </div> -->
+
+        <div>
+            <md-card>
+                <md-content>
+                    <md-list class="md-dense" flex>
+                        <md-list-item class="md-2-line">
+                            <md-icon class="md-avatar-icon">store</md-icon>
+                            <div class="md-list-item-text">
+                                <h3> {{ panel.vendedor.nome }} </h3>
+                                <p> {{ panel.vendedor.endereco }} </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-card>
+        </div>
+
+        <div style="margin: 8px;" ng-show="panel.screen.dataCard">
+            <md-autocomplete md-no-cache="panel.screen.autocomplete.noCache"
+                             md-selected-item="panel.entrega.endAddress"
+                             md-search-text="panel.endSearchText"
+                             md-selected-item-change="panel.destinationSelected(item)"
+                             md-items="item in panel.searchAddress(panel.endSearchText)"
+                             md-item-text="item.formatted_address"
+                             md-min-length="5"
+                             placeholder="Informe o local de entrega"
+                             md-autofocus
+                             ng-disabled="panel.entrega.id != null">
+                 <md-item-template>
+                     <span md-highlight-text="panel.endSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
+                 </md-item-template>
+                 <md-not-found>
+                     No address matching "{{ panel.endSearchText }}" were found.
+                 </md-not-found>
+             </md-autocomplete>
+        </div>
+
+        <div ng-show="panel.screen.dataCard">
+            <md-card layout-padding>
+                <div layout="row" flex="100">
+                    <md-input-container flex="33">
+                        <label>Tempo</label>
+                        <input ng-model="panel.entrega.tempo" type="text" disabled>
+                    </md-input-container>
+                    <md-input-container flex="33">
+                        <label>Distância</label>
+                        <input ng-model="panel.entrega.distancia" type="text" disabled>
+                    </md-input-container>
+                    <md-input-container flex="33">
+                        <label>Preço</label>
+                        <input ng-model="panel.entrega.preco" type="text" st-money ng-disabled="panel.entrega.id != null">
+                    </md-input-container>
+                </div>
+                <div layout="row" flex="100">
+                    <md-input-container flex="100">
+                        <label>Produto</label>
+                        <input ng-model="panel.entrega.produto" type="text" ng-disabled="panel.entrega.id != null">
+                    </md-input-container>
+                </div>
+                <div layout="row" flex="100">
+                    <md-input-container flex="65">
+                        <label>Nome</label>
+                        <input ng-model="panel.entrega.nome" type="text" ng-disabled="panel.entrega.id != null">
+                    </md-input-container>
+
+                    <md-input-container flex="35">
+                        <label>Documento</label>
+                        <input ng-model="panel.entrega.documento" type="text" ng-disabled="panel.entrega.id != null">
+                    </md-input-container>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</div>

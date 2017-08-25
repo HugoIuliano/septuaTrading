@@ -53,22 +53,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "entregadorendpoint.insertEntregador" : {
-      "path" : "entregador",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.insertEntregador",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "entregadorendpoint.getEntregador" : {
       "path" : "entregador/{id}",
       "httpMethod" : "GET",
@@ -85,6 +69,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregadorendpoint.insertEntregador" : {
+      "path" : "entregador",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.insertEntregador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -167,15 +167,15 @@
           "$ref" : "CollectionResponse_Entregador"
         }
       },
-      "com.septua.api.server.EntregadorEndpoint.insertEntregador" : {
-        "request" : {
-          "$ref" : "Entregador"
-        },
+      "com.septua.api.server.EntregadorEndpoint.getEntregador" : {
         "response" : {
           "$ref" : "Entregador"
         }
       },
-      "com.septua.api.server.EntregadorEndpoint.getEntregador" : {
+      "com.septua.api.server.EntregadorEndpoint.insertEntregador" : {
+        "request" : {
+          "$ref" : "Entregador"
+        },
         "response" : {
           "$ref" : "Entregador"
         }

@@ -117,11 +117,4 @@ public class Entrega {
 		this.lng = lng;
 	}
 
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
 }

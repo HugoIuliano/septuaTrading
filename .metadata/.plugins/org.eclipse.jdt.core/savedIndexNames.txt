@@ -1,5 +1,5 @@
 INDEX VERSION 1.130+/home/sergio/Development/unicamp/hackaton/septuaTrading/.metadata/.plugins/org.eclipse.jdt.core
-1617243237.index
+3420001255.index
 167286725.index
 1186540466.index
 2050172190.index
@@ -11,9 +11,9 @@ INDEX VERSION 1.130+/home/sergio/Development/unicamp/hackaton/septuaTrading/.met
 3032085167.index
 2724750356.index
 2967514041.index
-231110356.index
-260120848.index
 1238682054.index
+260120848.index
+231110356.index
 36195446.index
 1268255071.index
 2759404405.index
@@ -45,4 +45,4 @@ INDEX VERSION 1.130+/home/sergio/Development/unicamp/hackaton/septuaTrading/.met
 1404511985.index
 533035086.index
 1101893593.index
-3420001255.index
+1617243237.index

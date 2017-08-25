@@ -184,6 +184,9 @@
           },
           "lng" : {
             "type" : "string"
+          },
+          "situacao" : {
+            "type" : "string"
           }
         }
       }

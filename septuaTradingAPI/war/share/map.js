@@ -6,6 +6,19 @@
 
             this.marker = [];
 
+            function getIcon(situacao) {
+                var icon = null;
+                switch (situacao) {
+                    case "EM_COLETA":
+                        icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                        break;
+                    case "EM_TRANSITO":
+                        icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+                        break;
+                }
+                return icon;
+            }
+
             this.init = function() {
                 var options = {
                     center: new google.maps.LatLng(-23.5947479, -46.686047599999995),
@@ -32,29 +45,80 @@
                 return $http.get(address);
             }
 
-            this.addMarker = function(res, icon) {
-                // if (this.marker.len) {
-                //     this.marker.setMap(null);
-                // }
+            this.addMarker = function(res, contentString, entrega, callback) {
+
+                // var infowindow = new google.maps.InfoWindow({
+                //     content: contentString
+                // });
+
                 var marker = new google.maps.Marker({
                     map: this.map,
                     position: res.geometry.location,
                     animation: google.maps.Animation.DROP,
+                    icon: getIcon(entrega.situacao),
+                    entrega: entrega
+                });
+
+                marker.addListener('click', function() {
+                    // infowindow.open(map, marker);
+                    callback(marker);
                 });
 
                 this.marker.push(marker);
-                this.map.setCenter(res.geometry.location);
+                // this.map.setCenter(res.geometry.location);
             }
 
-            this.addBuildingMarker = function(res) {
-                if (this.buildingMarker) {
+            this.cleanMarkers = function() {
+                for (var i = 0; i < this.marker.length; i++) {
+                    var marker = this.marker[i]
+                    marker.setMap(null);
+                }
+            }
+
+            this.addBuildingMarker = function(res, closeOthers, contentString, empresa, callback) {
+
+                if (closeOthers && this.buildingMarker) {
                     this.buildingMarker.setMap(null);
                 }
-                this.buildingMarker = new google.maps.Marker({
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var markerBuilding = new google.maps.Marker({
                     map: this.map,
                     position: res.geometry.location,
                     animation: google.maps.Animation.DROP,
-                    icon: 'https://maps.google.com/mapfiles/kml/shapes/buildings.png'
+                    icon: 'https://maps.google.com/mapfiles/kml/shapes/buildings.png',
+                    empresa: empresa
+                });
+
+                if (!closeOthers) {
+                    markerBuilding.addListener('click', function() {
+                        infowindow.open(map, markerBuilding);
+                        callback(markerBuilding);
+                    });
+                    return;
+                }
+
+                this.map.setCenter(res.geometry.location);
+            }
+
+            this.addDeliveryMarker = function(res, closeOthers) {
+                if (closeOthers && this.deliveryMarker) {
+                    this.deliveryMarker.setMap(null);
+                }
+                var image = {
+                    url: 'http://maps.google.com/mapfiles/kml/shapes/truck.png',
+                    scaledSize: new google.maps.Size(34, 34),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(0, 32)
+                };
+                this.deliveryMarker = new google.maps.Marker({
+                    map: this.map,
+                    position: res.geometry.location,
+                    animation: google.maps.Animation.DROP,
+                    icon: image
                 });
                 this.map.setCenter(res.geometry.location);
             }

@@ -13,154 +13,39 @@
     <body>
         <div ng-controller="IndexController as index" layout="column" ng-cloak>
 
-            <md-fab-speed-dial md-open="lastMile.screen.isOpen" ng-click="lastMile.screen.isOpen = !lastMile.screen.isOpen" md-direction="up" class="md-fab md-scale md-fab-bottom-right">
-                <md-fab-trigger>
-                    <md-button aria-label="Adicionar Entidades" class="md-fab">
-                        <md-icon>add</md-icon>
-                    </md-button>
-                </md-fab-trigger>
-
-                <md-fab-actions>
-                    <md-button aria-label="Vendedor" class="md-fab md-mini md-primary" ng-click="index.addVendedor($event)">
-                        <md-icon>store</md-icon>
-                        <md-tooltip md-direction="left">Vendedor</md-tooltip>
-                    </md-button>
-                </md-fab-actions>
-
-                <md-fab-actions>
-                    <md-button aria-label="Entrega" class="md-fab md-mini md-primary" ng-click="index.viewEntrega($event)">
-                        <md-icon>mail</md-icon>
-                        <md-tooltip md-direction="left">Entrega</md-tooltip>
-                    </md-button>
-                </md-fab-actions>
-            </md-fab-speed-dial>
-
             <md-toolbar md-scroll-shrink ng-if="true">
                 <div class="md-toolbar-tools">
                     <h3>
-                        <span>{{ index.screen.title }}</span>
+                        <span>{{ screen.title }}</span>
                     </h3>
                 </div>
             </md-toolbar>
 
-            <div id="map"></div>
-
-            <div class="float-address">
-
-                <!-- <div layout-margin>
-                    <md-autocomplete md-no-cache="index.screen.autocomplete.noCache"
-                                     md-selected-item="index.originAddress"
-                                     md-search-text="index.originSearchText"
-                                     md-selected-item-change="index.originSelected(item)"
-                                     md-items="item in index.searchAddress(index.originSearchText)"
-                                     md-item-text="item.formatted_address"
-                                     md-min-length="5"
-                                     placeholder="Origem">
-                         <md-item-template>
-                             <span md-highlight-text="index.originSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
-                         </md-item-template>
-                         <md-not-found>
-                             No address matching "{{ index.originSearchText }}" were found.
-                         </md-not-found>
-                     </md-autocomplete>
-                </div> -->
-
-                <div>
-                    <md-card>
-                        <md-content>
-                            <md-list class="md-dense" flex>
-                                <md-list-item class="md-2-line">
-                                    <md-icon class="md-avatar-icon">store</md-icon>
-                                    <div class="md-list-item-text">
-                                        <h3> {{ index.vendedor.nome }} </h3>
-                                        <p> {{ index.vendedor.endereco }} </p>
-                                    </div>
-                                </md-list-item>
-                            </md-list>
-                        </md-content>
-                    </md-card>
-                </div>
-
-                <div style="margin: 8px;" ng-show="index.screen.dataCard">
-                    <md-autocomplete md-no-cache="index.screen.autocomplete.noCache"
-                                     md-selected-item="index.entrega.endAddress"
-                                     md-search-text="index.endSearchText"
-                                     md-selected-item-change="index.destinationSelected(item)"
-                                     md-items="item in index.searchAddress(index.endSearchText)"
-                                     md-item-text="item.formatted_address"
-                                     md-min-length="5"
-                                     placeholder="Informe o local de entrega"
-                                     md-autofocus>
-                         <md-item-template>
-                             <span md-highlight-text="index.endSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
-                         </md-item-template>
-                         <md-not-found>
-                             No address matching "{{ index.endSearchText }}" were found.
-                         </md-not-found>
-                     </md-autocomplete>
-                </div>
-
-                <div ng-show="index.screen.dataCard">
-                    <md-card layout-padding>
-                        <div layout="row" flex="100">
-                            <md-input-container flex="33">
-                                <label>Tempo</label>
-                                <input ng-model="index.entrega.tempo" type="text" disabled>
-                            </md-input-container>
-                            <md-input-container flex="33">
-                                <label>Distância</label>
-                                <input ng-model="index.entrega.distancia" type="text" disabled>
-                            </md-input-container>
-                            <md-input-container flex="33">
-                                <label>Preço</label>
-                                <input ng-model="index.entrega.preco" type="text" st-money>
-                            </md-input-container>
-                        </div>
-                        <div layout="row" flex="100">
-                            <md-input-container flex="100">
-                                <label>Produto</label>
-                                <input ng-model="index.entrega.produto" type="text">
-                            </md-input-container>
-                        </div>
-                        <div layout="row" flex="100">
-                            <md-input-container flex="65">
-                                <label>Nome</label>
-                                <input ng-model="index.entrega.nome" type="text">
-                            </md-input-container>
-
-                            <md-input-container flex="35">
-                                <label>Documento</label>
-                                <input ng-model="index.entrega.documento" type="text">
-                            </md-input-container>
-                        </div>
-                        <div layout="row" layout-align="end center">
-                            <md-button class="md-secundary">cancelar</md-button>
-                            <md-button class="md-raised md-primary" ng-click="index.addEntrega()">salvar</md-button>
-                        </div>
-                    </md-card>
-                </div>
-            </div>
+            <ng-view></ng-view>
         </div>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYuEz4jGQLqNpI4n8Zt62P3qV2egjdrJU&libraries=places"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-        <!-- Angular Material Library -->
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
         <script type="text/javascript">
-            angular.module('SeptuaTradingApp', ['ngMaterial']);
+            angular.module('SeptuaTradingApp', ['ngRoute', 'ngMaterial']);
         </script>
 
-        <script src="/indexController.js" type="text/javascript"></script>
         <script src="/share/map.js" type="text/javascript"></script>
         <script src="/share/filter.js" type="text/javascript"></script>
+        <script src="/share/router.js" type="text/javascript"></script>
         <script src="/share/notification.js" type="text/javascript"></script>
         <script src="/components/entrega.js" type="text/javascript"></script>
         <script src="/components/vendedor.js" type="text/javascript"></script>
-
-        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDAcH6-flBeXKZrihwkzA7Vee30fX6UX8&callback=initMap" async defer></script> -->
+        <script src="/components/entregador.js" type="text/javascript"></script>
+        <script src="/components/panel/panelController.js" type="text/javascript"></script>
+        <script src="/components/vendedor/vendedorController.js" type="text/javascript"></script>
+        <script src="/components/entregador/entregadorController.js" type="text/javascript"></script>
+        <script src="/indexController.js" type="text/javascript"></script>
     </body>
 </html>

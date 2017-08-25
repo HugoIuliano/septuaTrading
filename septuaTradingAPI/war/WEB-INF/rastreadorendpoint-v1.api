@@ -28,27 +28,6 @@
   "ownerName" : "septua.com",
   "packagePath" : "api.server",
   "methods" : {
-    "rastreadorendpoint.removeRastreador" : {
-      "path" : "rastreador/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.removeRastreador",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "rastreadorendpoint.getRastreador" : {
       "path" : "rastreador/{id}",
       "httpMethod" : "GET",
@@ -86,6 +65,43 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "rastreadorendpoint.updateRastreador" : {
+      "path" : "rastreador",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.updateRastreador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "rastreadorendpoint.removeRastreador" : {
+      "path" : "rastreador/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.removeRastreador",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "rastreadorendpoint.listRastreador" : {
       "path" : "rastreador",
       "httpMethod" : "GET",
@@ -106,22 +122,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "rastreadorendpoint.updateRastreador" : {
-      "path" : "rastreador",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.septua.api.server.RastreadorEndpoint.updateRastreador",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -171,8 +171,6 @@
       }
     },
     "methods" : {
-      "com.septua.api.server.RastreadorEndpoint.removeRastreador" : {
-      },
       "com.septua.api.server.RastreadorEndpoint.getRastreador" : {
         "response" : {
           "$ref" : "Rastreador"
@@ -186,17 +184,19 @@
           "$ref" : "Rastreador"
         }
       },
-      "com.septua.api.server.RastreadorEndpoint.listRastreador" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Rastreador"
-        }
-      },
       "com.septua.api.server.RastreadorEndpoint.updateRastreador" : {
         "request" : {
           "$ref" : "Rastreador"
         },
         "response" : {
           "$ref" : "Rastreador"
+        }
+      },
+      "com.septua.api.server.RastreadorEndpoint.removeRastreador" : {
+      },
+      "com.septua.api.server.RastreadorEndpoint.listRastreador" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Rastreador"
         }
       }
     }

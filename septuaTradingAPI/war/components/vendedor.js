@@ -86,7 +86,7 @@
                                 '</div>' +
                                 '<md-dialog-actions>' +
                                     '<md-button arial-label="cancelar" ng-click="vendedorDialog.close()">cancelar</md-button>' +
-                                    '<md-button arial-label="salvar" ng-click="vendedorDialog.salvar()" class="md-accent md-raised">salvar</md-button>' +
+                                    '<md-button arial-label="salvar" ng-click="vendedorDialog.add()" class="md-accent md-raised">salvar</md-button>' +
                                 '</md-dialog-actions>' +
                             '</md-dialog>'
                     });
@@ -96,7 +96,7 @@
             return service;
         }])
 
-        .controller('VendedorCtrl', ['$mdDialog', 'Map', 'Vendedor', function($mdDialog, Map, Vendedor) {
+        .controller('VendedorCtrl', ['$mdDialog', 'Map', 'Vendedor', 'notification', function($mdDialog, Map, Vendedor, notification) {
 
             var self = this;
 
@@ -121,7 +121,12 @@
 
             function add() {
                 Vendedor.post(self.vendedor.nome, self.vendedor.documento, self.vendedor.address.formatted_address, self.vendedor.address.geometry.location.lat, self.vendedor.address.geometry.location.lng).then(function(response) {
-                    console.log("Vendedor.post", response);
+                    if (response.status != 200) {
+                        notification.showMessage("Ocorreu um erro, o vendedor não foi salvo");
+                        return;
+                    }
+                    notification.showMessage("Vendedor salvo");
+                    $mdDialog.hide();
                 });
             }
         }]);

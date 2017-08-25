@@ -6,9 +6,9 @@
 
             const url = '/_ah/api/entregaendpoint/v1/entrega';
 
-            function Entrega(vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino) {
+            function Entrega(id, vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino, situacao) {
                 return {
-                    "id" : getUUID()
+                    "id" : id
                     , "vendedorId": vendedorId
                     , "vendedorNome": vendedorNome
                     , "recebedorNome" : recebedorNome
@@ -20,6 +20,7 @@
                     , "endereco": endereco
                     , "lat": latDestino
                     , "lng": lngDestino
+                    , "situacao" : situacao
                 }
             }
 
@@ -33,13 +34,20 @@
 
             var service = {
 
-                get: function() {
-                    return $http.get(url);
+                get: function(entregaId) {
+                    var id = (entregaId != null) ? '/' + entregaId : '';
+                    return $http.get(url + id);
                 }
 
-                , post: function(vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino) {
-                    var entrega = new Entrega(vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino);
+                , post: function(vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino, situacao) {
+                    var id = getUUID();
+                    var entrega = new Entrega(id, vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino, situacao);
                     return $http.post(url, entrega);
+                }
+
+                , delivery: function(id, vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino, situacao) {
+                    var entrega = new Entrega(id, vendedorId, vendedorNome, recebedorNome, recebedorDocumento, produto, distancia, tempo, preco, endereco, latDestino, lngDestino, situacao);
+                    return $http.put(url, entrega);
                 }
             }
 
