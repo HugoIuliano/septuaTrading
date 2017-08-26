@@ -1,0 +1,92 @@
+<div ng-controller="VendedorController as vendedor">
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Entrega" ng-click="vendedor.viewEntrega($event)">
+        <md-icon>add</md-icon>
+        <md-tooltip md-direction="left">Entrega</md-tooltip>
+    </md-button>
+
+    <div id="mapVendedor"></div>
+
+    <div class="float-address">
+
+        <div>
+            <md-card>
+                <md-content>
+                    <md-list class="md-dense" flex>
+                        <!-- <md-list-item class="md-2-line" ng-click="vendedor.selectVendedor()"> -->
+                        <md-list-item class="md-2-line">
+                            <md-icon class="md-avatar-icon">store</md-icon>
+                            <div class="md-list-item-text">
+                                <h3> {{ vendedor.vendedor.nome }} </h3>
+                                <p> {{ vendedor.vendedor.endereco }} </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-card>
+        </div>
+
+        <div style="margin: 8px;" ng-show="vendedor.screen.dataCard">
+            <md-autocomplete md-no-cache="vendedor.screen.autocomplete.noCache"
+                             md-selected-item="vendedor.entrega.endAddress"
+                             md-search-text="vendedor.endSearchText"
+                             md-selected-item-change="vendedor.destinationSelected(item)"
+                             md-items="item in vendedor.searchAddress(vendedor.endSearchText)"
+                             md-item-text="item.formatted_address"
+                             md-min-length="5"
+                             placeholder="Informe o local de entrega"
+                             md-autofocus
+                             ng-disabled="vendedor.entrega.id != null">
+                 <md-item-template>
+                     <span md-highlight-text="vendedor.endSearchText" md-highlight-flags="^i">{{ item.formatted_address }}</span>
+                 </md-item-template>
+                 <md-not-found>
+                     No address matching "{{ vendedor.endSearchText }}" were found.
+                 </md-not-found>
+             </md-autocomplete>
+        </div>
+
+        <div ng-show="vendedor.screen.dataCard">
+            <md-card layout-padding>
+                <div layout="row" flex="100">
+                    <md-input-container flex="33">
+                        <label>Tempo</label>
+                        <input ng-model="vendedor.entrega.tempo" type="text" disabled>
+                    </md-input-container>
+                    <md-input-container flex="33">
+                        <label>Distância</label>
+                        <input ng-model="vendedor.entrega.distancia" type="text" disabled>
+                    </md-input-container>
+                    <md-input-container flex="33">
+                        <label>Preço</label>
+                        <input ng-model="vendedor.entrega.preco" type="text" st-money ng-disabled="vendedor.entrega.id != null">
+                    </md-input-container>
+                </div>
+                <div layout="row" flex="100">
+                    <md-input-container flex="100">
+                        <label>Produto</label>
+                        <input ng-model="vendedor.entrega.produto" type="text" ng-disabled="vendedor.entrega.id != null">
+                    </md-input-container>
+                </div>
+                <div layout="row" flex="100">
+                    <md-input-container flex="65">
+                        <label>Nome</label>
+                        <input ng-model="vendedor.entrega.nome" type="text" ng-disabled="vendedor.entrega.id != null">
+                    </md-input-container>
+
+                    <md-input-container flex="35">
+                        <label>Documento</label>
+                        <input ng-model="vendedor.entrega.documento" type="text" ng-disabled="vendedor.entrega.id != null">
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="end center" ng-show="vendedor.entrega.id == null">
+                    <md-button class="md-secundary" ng-click="vendedor.hideEntrega()">cancelar</md-button>
+                    <md-button class="md-raised md-accent" ng-click="vendedor.addEntrega()">salvar</md-button>
+                </div>
+                <div layout="row" layout-align="end center" ng-show="vendedor.entrega.id != null">
+                    <md-button class="md-secundary" ng-click="vendedor.hideEntrega()">fechar</md-button>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</div>

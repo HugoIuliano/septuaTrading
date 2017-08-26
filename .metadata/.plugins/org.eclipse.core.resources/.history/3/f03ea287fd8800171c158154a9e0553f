@@ -1,0 +1,19 @@
+package com.septua.api.server;
+
+@Entity
+public class Entrega {
+	
+	@Id
+	private String id;
+	private String vendedorId;
+	private String vendedorNome;
+	private String recebedorNome;
+	private String recebedorDocumento;
+	private String produto;
+	private String distancia;
+	private String tempo;
+	private String preco;
+	private String endereco;
+	private String lat;
+	private String lng;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="SeptuaTradingApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Septua Trading</title>
+
+        <link href="/css/css.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    </head>
+    <body>
+        <div ng-controller="IndexController as index" layout="column" ng-cloak>
+
+            <md-toolbar md-scroll-shrink ng-if="true" class="md-whiteframe-z2 md-hue-2">
+                <div class="md-toolbar-tools">
+                    <div class="domain-icon"></div>
+                    <h3 style="margin-left: 18px;" flex>
+                        <span>{{ screen.title }}</span>
+                    </h3>
+                </div>
+            </md-toolbar>
+
+            <ng-view></ng-view>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtdPUbhKXuMgFJ2MP5ZTTdQZKmVmIOWGM&libraries=places"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+        <script type="text/javascript">
+            angular.module('SeptuaTradingApp', ['ngRoute', 'ngMaterial']);
+        </script>
+
+        <script src="/share/map.js" type="text/javascript"></script>
+        <script src="/share/filter.js" type="text/javascript"></script>
+        <script src="/share/router.js" type="text/javascript"></script>
+        <script src="/share/notification.js" type="text/javascript"></script>
+        <script src="/components/entrega.js" type="text/javascript"></script>
+        <script src="/components/vendedor.js" type="text/javascript"></script>
+        <script src="/components/entregador.js" type="text/javascript"></script>
+        <script src="/components/panel/panelController.js" type="text/javascript"></script>
+        <script src="/components/vendedor/vendedorController.js" type="text/javascript"></script>
+        <script src="/components/entregador/entregadorController.js" type="text/javascript"></script>
+        <script src="/indexController.js" type="text/javascript"></script>
+    </body>
+</html>

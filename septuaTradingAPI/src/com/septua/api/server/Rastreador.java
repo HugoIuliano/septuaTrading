@@ -1,0 +1,64 @@
+package com.septua.api.server;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Rastreador {
+
+	@Id
+	private String id;
+	private String entregaId;
+	private String vendedorId;
+	private String entregadorId;
+	private String lat;
+	private String lng;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getEntregaId() {
+		return entregaId;
+	}
+
+	public void setEntregaId(String entregaId) {
+		this.entregaId = entregaId;
+	}
+
+	public String getVendedorId() {
+		return vendedorId;
+	}
+
+	public void setVendedorId(String vendedorId) {
+		this.vendedorId = vendedorId;
+	}
+
+	public String getEntregadorId() {
+		return entregadorId;
+	}
+
+	public void setEntregadorId(String entregadorId) {
+		this.entregadorId = entregadorId;
+	}
+	
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+}

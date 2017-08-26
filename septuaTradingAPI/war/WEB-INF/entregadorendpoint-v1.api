@@ -1,0 +1,195 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://septuaapi.appspot.com/_ah/api",
+  "name" : "entregadorendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://septuaapi.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "septua.com",
+  "ownerName" : "septua.com",
+  "packagePath" : "api.server",
+  "methods" : {
+    "entregadorendpoint.listEntregador" : {
+      "path" : "entregador",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.listEntregador",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregadorendpoint.getEntregador" : {
+      "path" : "entregador/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.getEntregador",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregadorendpoint.insertEntregador" : {
+      "path" : "entregador",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.insertEntregador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregadorendpoint.updateEntregador" : {
+      "path" : "entregador",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.updateEntregador",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "entregadorendpoint.removeEntregador" : {
+      "path" : "entregador/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.septua.api.server.EntregadorEndpoint.removeEntregador",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_Entregador" : {
+        "id" : "CollectionResponse_Entregador",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Entregador"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Entregador" : {
+        "id" : "Entregador",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "nome" : {
+            "type" : "string"
+          },
+          "documento" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.septua.api.server.EntregadorEndpoint.listEntregador" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Entregador"
+        }
+      },
+      "com.septua.api.server.EntregadorEndpoint.getEntregador" : {
+        "response" : {
+          "$ref" : "Entregador"
+        }
+      },
+      "com.septua.api.server.EntregadorEndpoint.insertEntregador" : {
+        "request" : {
+          "$ref" : "Entregador"
+        },
+        "response" : {
+          "$ref" : "Entregador"
+        }
+      },
+      "com.septua.api.server.EntregadorEndpoint.updateEntregador" : {
+        "request" : {
+          "$ref" : "Entregador"
+        },
+        "response" : {
+          "$ref" : "Entregador"
+        }
+      },
+      "com.septua.api.server.EntregadorEndpoint.removeEntregador" : {
+      }
+    }
+  }
+}

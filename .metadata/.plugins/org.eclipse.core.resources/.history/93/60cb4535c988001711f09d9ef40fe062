@@ -1,0 +1,10 @@
+package com.septua.api.server;
+
+@Entity
+public class Vendedor {
+	String id;
+	String nome:
+	String lat;
+	String lng;
+	String endereco:
+}

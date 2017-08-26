@@ -1,0 +1,6 @@
+package com.septua.api.server;
+
+@Entity
+public class Entrega {
+
+}

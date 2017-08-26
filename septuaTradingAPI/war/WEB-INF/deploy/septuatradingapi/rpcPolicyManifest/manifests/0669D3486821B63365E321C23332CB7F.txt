@@ -1,0 +1,2 @@
+serviceClass: com.septua.api.client.GreetingService
+path: C4E848BE580F3FADE1EFFE6034B4BCC8.gwt.rpc

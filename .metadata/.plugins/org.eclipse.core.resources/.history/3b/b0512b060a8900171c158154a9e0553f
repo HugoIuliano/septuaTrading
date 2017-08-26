@@ -1,0 +1,14 @@
+package com.septua.api.server;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Rastreador {
+	
+	@Id
+	private String id;
+	private String entregaId;
+	private String vendedorId;
+	private String entregadorId;
+}

@@ -1,0 +1,21 @@
+package com.septua.api.server;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Vendedor {
+	
+	@Id
+	private String id;
+	private String appToken;
+	private String accessToken;
+	private String nome;
+	private String documento;
+	private String endereco;
+	private String lat;
+	private String lng;
+
+	
+	
+}
