@@ -36,17 +36,97 @@
                     return $http.post(url, vendedor);
                 }
 
+                // , selectDialog: function(callback) {
+                //     $mdDialog.show({
+                //         controller: function(Vendedor, callback) {
+                //             var self = this;
+                //
+                //             self.selected = selected;
+                //
+                //             Vendedor.get().then(function(response) {
+                //                 if (response.data.items == null) {
+                //                     return;
+                //                 }
+                //                 self.vendedorList = response.data.items;
+                //             });
+                //
+                //             function closeDialog() {
+                //                 $mdDialog.hide();
+                //             }
+                //
+                //             function selected(vendedor) {
+                //                 $mdDialog.hide([callback(vendedor)]);
+                //             }
+                //         }
+                //         , controllerAs: 'vendedorDialog'
+                //         , fullscreen: $mdMedia('xs')
+                //         , locals: {
+                //             callback: function(element) {
+                //                 callback(element);
+                //             }
+                //         }
+                //         , template:
+                //             '<md-dialog aria-label="Lista vendedores" flex-xs="100" flex-sm="80" flex-md="65" flex-lg="50" flex-gt-lg="45" class="md-hue-2">' +
+                //                 '<md-card>' +
+                //                     '<md-content>' +
+                //                         '<md-list class="md-dense" flex>' +
+                //                             '<md-list-item ng-repeat="element in vendedorDialog.vendedorList" class="md-2-line" ng-click="vendedorDialog.selected(element)">' +
+                //                                 '<md-icon class="md-avatar-icon">store</md-icon>' +
+                //                                 '<div class="md-list-item-text">' +
+                //                                     '<h3> {{ element.nome }} </h3>' +
+                //                                     '<p> {{ element.endereco }} </p>' +
+                //                                 '</div>' +
+                //                             '</md-list-item>' +
+                //                         '</md-list>' +
+                //                     '</md-content>' +
+                //                 '</md-card>' +
+                //             '</md-dialog>'
+                //     });
+                // }
+
                 , dialog: function() {
                     $mdDialog.show({
-                        controller: 'VendedorCtrl'
+                        controller: function(Map, Vendedor, notification) {
+                            var self = this;
+
+                            self.screen = {
+                                actionTitle: "Vendedor"
+                            }
+
+                            self.closeDialog = closeDialog;
+                            self.searchAddress = searchAddress;
+                            self.add = add;
+                            self.vendedor = {};
+
+                            function closeDialog() {
+                                $mdDialog.hide();
+                            }
+
+                            function searchAddress(textSearch) {
+                                return Map.addressSearch(textSearch).then(function(response) {
+                                    return response.data.results;
+                                });
+                            }
+
+                            function add() {
+                                Vendedor.post(self.vendedor.nome, self.vendedor.documento, self.vendedor.address.formatted_address, self.vendedor.address.geometry.location.lat, self.vendedor.address.geometry.location.lng).then(function(response) {
+                                    if (response.status != 200) {
+                                        notification.showMessage("Ocorreu um erro, o vendedor não foi salvo");
+                                        return;
+                                    }
+                                    notification.showMessage("Vendedor salvo");
+                                    $mdDialog.hide();
+                                });
+                            }
+                        }
                         , controllerAs: 'vendedorDialog'
                         , fullscreen: $mdMedia('xs')
                         , locals: {}
                         , template:
                             '<md-dialog aria-label="Vendedor" flex-xs="100" flex-sm="80" flex-md="65" flex-lg="50" flex-gt-lg="45">' +
-                                '<md-toolbar class="animate-show md-whiteframe-z2">' +
+                                '<md-toolbar class="animate-show md-whiteframe-z2 md-hue-2">' +
                                     '<div class="md-toolbar-tools">' +
-                                        '<md-button class="md-icon-button" aria-label="Voltar" ng-click="vendedorDialog.close()">' +
+                                        '<md-button class="md-icon-button" aria-label="Voltar" ng-click="vendedorDialog.closeDialog()">' +
                                             '<i class="material-icons" title="Voltar">close</i>' +
                                         '</md-button>' +
                                         '<h3 flex>' +
@@ -85,7 +165,7 @@
                                     '</div>' +
                                 '</div>' +
                                 '<md-dialog-actions>' +
-                                    '<md-button arial-label="cancelar" ng-click="vendedorDialog.close()">cancelar</md-button>' +
+                                    '<md-button arial-label="cancelar" ng-click="vendedorDialog.closeDialog()">cancelar</md-button>' +
                                     '<md-button arial-label="salvar" ng-click="vendedorDialog.add()" class="md-accent md-raised">salvar</md-button>' +
                                 '</md-dialog-actions>' +
                             '</md-dialog>'
@@ -94,40 +174,5 @@
             }
 
             return service;
-        }])
-
-        .controller('VendedorCtrl', ['$mdDialog', 'Map', 'Vendedor', 'notification', function($mdDialog, Map, Vendedor, notification) {
-
-            var self = this;
-
-            self.screen = {
-                actionTitle: "Vendedor"
-            }
-
-            self.close = close;
-            self.searchAddress = searchAddress;
-            self.add = add;
-            self.vendedor = {};
-
-            function close() {
-                $mdDialog.hide();
-            }
-
-            function searchAddress(textSearch) {
-                return Map.addressSearch(textSearch).then(function(response) {
-                    return response.data.results;
-                });
-            }
-
-            function add() {
-                Vendedor.post(self.vendedor.nome, self.vendedor.documento, self.vendedor.address.formatted_address, self.vendedor.address.geometry.location.lat, self.vendedor.address.geometry.location.lng).then(function(response) {
-                    if (response.status != 200) {
-                        notification.showMessage("Ocorreu um erro, o vendedor não foi salvo");
-                        return;
-                    }
-                    notification.showMessage("Vendedor salvo");
-                    $mdDialog.hide();
-                });
-            }
         }]);
 })();

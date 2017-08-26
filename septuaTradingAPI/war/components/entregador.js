@@ -41,7 +41,7 @@
                         , locals: {}
                         , template:
                             '<md-dialog aria-label="Entregador" flex-xs="100" flex-sm="80" flex-md="65" flex-lg="50" flex-gt-lg="45">' +
-                                '<md-toolbar class="animate-show md-whiteframe-z2">' +
+                                '<md-toolbar class="animate-show md-whiteframe-z2 md-hue-2">' +
                                     '<div class="md-toolbar-tools">' +
                                         '<md-button class="md-icon-button" aria-label="Voltar" ng-click="entregadorDialog.close()">' +
                                             '<i class="material-icons" title="Fechar">close</i>' +

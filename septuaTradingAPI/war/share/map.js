@@ -5,6 +5,7 @@
         .service('Map', function($http, $q) {
 
             this.marker = [];
+            this.buildingsMarker = [];
 
             function getIcon(situacao) {
                 var icon = null;
@@ -78,8 +79,11 @@
 
             this.addBuildingMarker = function(map, res, closeOthers, contentString, empresa, callback) {
 
-                if (closeOthers && this.buildingMarker) {
-                    this.buildingMarker.setMap(null);
+                if (closeOthers && this.buildingsMarker.length > 0) {
+                    for (var i = 0; i < this.buildingsMarker.length; i++) {
+                        var marker = this.buildingsMarker[i]
+                        marker.setMap(null);
+                    }
                 }
 
                 var infowindow = new google.maps.InfoWindow({
@@ -102,6 +106,7 @@
                     return;
                 }
 
+                this.buildingsMarker.push(markerBuilding);
                 map.setCenter(res.geometry.location);
             }
 

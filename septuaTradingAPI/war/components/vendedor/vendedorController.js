@@ -17,6 +17,7 @@
 
             self.entrega = {};
 
+            self.selectVendedor = selectVendedor;
             self.searchAddress = searchAddress;
             self.destinationSelected = destinationSelected;
             self.viewEntrega = viewEntrega;
@@ -25,23 +26,21 @@
 
             self.map = Map.init(document.getElementById('mapVendedor'));
 
-            Vendedor.get().then(function(response) {
-
-                if (response.data.items == null) {
+            getVendedores().then(function(response) {
+                if (response == null) {
                     return;
                 }
-
-                self.vendedor = response.data.items[0];
-                self.vendedor.geometry = {
-                    location: {
-                        lat: Number(self.vendedor.lat)
-                        , lng: Number(self.vendedor.lng)
-                    }
-                }
-                Map.addBuildingMarker(self.map, self.vendedor, true);
-
-                getEntregas();
+                setVendedor(response[0]);
             });
+
+            function getVendedores() {
+                return Vendedor.get().then(function(response) {
+                    if (response.data.items == null) {
+                        return;
+                    }
+                    return response.data.items;
+                });
+            }
 
             function getEntregas() {
 
@@ -50,6 +49,8 @@
                     if (response.data.items == null) {
                         return;
                     }
+
+                    Map.cleanMarkers();
 
                     for (var i = 0; i < response.data.items.length; i++) {
                         var record = response.data.items[i];
@@ -90,6 +91,24 @@
                         }
                     }
                 });
+            }
+
+            function selectVendedor() {
+                Vendedor.selectDialog(function(vendedor) {
+                    setVendedor(vendedor);
+                });
+            }
+
+            function setVendedor(vendedor) {
+                self.vendedor = vendedor;
+                self.vendedor.geometry = {
+                    location: {
+                        lat: Number(self.vendedor.lat)
+                        , lng: Number(self.vendedor.lng)
+                    }
+                }
+                Map.addBuildingMarker(self.map, self.vendedor, true);
+                getEntregas();
             }
 
             function searchAddress(textSearch) {
@@ -159,5 +178,9 @@
                     getEntregas();
                 });
             }
+
+
+
+
         }]);
 })();
